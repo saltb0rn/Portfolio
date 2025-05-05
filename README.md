@@ -1,20 +1,10 @@
-# Portfolio
+# 作品集
 
-This template should help get you started developing with Vue 3 in Vite.
+该项目用来演示个人做过的作品, 包括跟练的和原创的, 主要是偏 `3D` 的作品.
 
-## Recommended IDE Setup
+`着陆页` 目前还在筹划中, 由于涉及 `3D建模`, 而且本人还在学习 `Blender` 中, 所以还需要一段时间才能上线.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+## 项目配置
 
 ```sh
 npm install
