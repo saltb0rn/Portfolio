@@ -8,14 +8,14 @@ import gsap from 'gsap'
 import vertShader from './shaders/music.vert'
 import fragShader from './shaders/music.frag'
 import track from '../../assets/music/Mr-Top-Player.flac?url'
+import { SoftGlitchPass } from '../../utils/postprocessing/SoftGlitchPass.js'
 
 
 export default class Scene {
     proxy: unknown
-    musicMgr: Music
     constructor() {
         Access.scene = new THREE.Scene()
-        this.musicMgr = new Music()        
+        Access.musicMgr = new Music()
         this.initScene()
     }
 
@@ -26,7 +26,7 @@ export default class Scene {
             fragmentShader: fragShader,
             uniforms: {
                 uTime: { value: 0 },
-                uAudioFreq: { value: 0 }
+                uAudioFreq: { value: 0 },
             },
         })
         const sphere = new THREE.Mesh(g, m)
@@ -38,14 +38,31 @@ export default class Scene {
         wireframe.scale.setScalar(1 + 0.015)
         wireframe.position.set(.0, .0, -5.)
         Access.scene!.add(wireframe)
-        
-        this.musicMgr.load(track)
 
-        Access.on('musicUpdate', (timeStamp: number, timeDelta: number) => {
-            sphere.material.uniforms.uTime.value = timeStamp / 1000.0
-            if (!this.musicMgr.sound.isPlaying) return
-            // sphere.material.uniforms.uTime.value += Math.PI / 180
-            const freq = this.musicMgr.getFrequency()
+        Access.musicMgr!.load(track)
+
+        Access.on('musicUpdate', () => {
+            // sphere.material.uniforms.uTime.value = timeStamp / 1000.0
+            const softGlithPass = Access.postProcesser!.passes.find(
+                (value) => value instanceof SoftGlitchPass)
+            if (Access.musicMgr!.state < 2) {
+                if (softGlithPass) (softGlithPass as any).factor = 0
+                if (Access.musicMgr!.state < 1 &&
+                    sphere.material.uniforms.uTime.value >= 0) {
+                    sphere.material.uniforms.uTime.value %= Math.PI
+                    gsap.to(
+                        sphere.material.uniforms.uTime,
+                        {
+                            duration: 1.5,
+                            ease: 'Slow.easeout',
+                            value: 0
+                        }
+                    )
+                }
+                return
+            }
+            sphere.material.uniforms.uTime.value += Math.PI / 180
+            const freq = Access.musicMgr!.getFrequency()
             gsap.to(
                 sphere.material.uniforms.uAudioFreq,
                 {
@@ -54,6 +71,7 @@ export default class Scene {
                     value: freq
                 }
             )
+            if (softGlithPass) (softGlithPass as any).factor = freq
         })
 
     }

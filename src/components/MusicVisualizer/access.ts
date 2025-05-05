@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
 import { EventEmitter } from '../../utils/eventEmitter'
+import Music from './music.ts'
 
 class Access extends EventEmitter {
 
@@ -9,6 +10,7 @@ class Access extends EventEmitter {
     public scene?: THREE.Scene
     public postProcesser?: EffectComposer
     public outputContainer?: HTMLElement
+    public musicMgr?: Music
     private events: string[] = []
 
     private static instance = new Access()

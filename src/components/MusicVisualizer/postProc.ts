@@ -6,9 +6,7 @@ import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
 import { SavePass } from 'three/examples/jsm/postprocessing/SavePass.js'
 import { BlendShader } from 'three/examples/jsm/shaders/BlendShader.js'
 import { CopyShader } from 'three/examples/jsm/shaders/CopyShader.js'
-import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js'
 import { SoftGlitchPass } from '../../utils/postprocessing/SoftGlitchPass.js'
-
 
 export default class {
 
@@ -39,9 +37,9 @@ export default class {
             )
         )
 
-        const blendPass = new ShaderPass(BlendShader, 'tDiffuse1')
-        blendPass.uniforms['tDiffuse2'].value = savePass.renderTarget.texture
-        blendPass.uniforms['mixRatio'].value = .725
+        // const blendPass = new ShaderPass(BlendShader, 'tDiffuse1')
+        // blendPass.uniforms['tDiffuse2'].value = savePass.renderTarget.texture
+        // blendPass.uniforms['mixRatio'].value = .725
 
         const outputPass = new ShaderPass(CopyShader)
         outputPass.renderToScreen = true
@@ -62,6 +60,7 @@ export default class {
                     Access.renderer!.domElement.height
                 )
             }
+            // glitchPass.factor = freq
         })
     }
 }

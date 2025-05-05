@@ -37,7 +37,7 @@ float gavoronoi3(in vec2 p)
   time += timeAdd;
   vec2 ip = floor(p);
   vec2 fp = fract(p);
-  float f = 3.0 * PI;//frequency
+  float f = clamp(uTime, 0.0, 3.0) * PI;//frequency
   float v = 1.;//cell variability <1.
   float dv = .0;//direction variability <1.
   vec2 dir = vec2(1.3) + cos(time);
@@ -83,7 +83,7 @@ vec3 nor(in vec2 p)
 void main() {
   vec3 light = normalize(vec3(3., 2., -1.));
   float r = dot(nor(uv), light);
-  float displacement = clamp(1. - r, 0.0, 0.3) + uAudioFreq / 2.0;
+  float displacement = clamp(1. - r, 0.0, 0.3) + uAudioFreq;
   vec3 newPosition = position + normal * displacement;
   gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
   vPattern = r;

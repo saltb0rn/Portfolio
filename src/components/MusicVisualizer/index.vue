@@ -5,17 +5,30 @@ import { World } from './main.ts'
 
 const output: Ref<HTMLElement | undefined> = ref(undefined)
 
-let world: World | null = null
+const world: Ref<World | undefined> = ref(undefined)
+
+const lblText: Ref<string> = ref('Play')
 
 function play() {
-  if (world) {
-    world.scene.musicMgr.play()
+  if (world && world.value) {
+    if (world.value.state == 2) {
+      world.value.pause()
+    } else {
+      world.value.play()
+    }
+    const m = {
+      0: 'Play',
+      1: 'Play',
+      2: 'Pause'
+    }
+    lblText.value = m[world.value.state]    
   }
+
 }
 
 onMounted(() => {
   if (output.value) {
-    world = new World(output.value)
+    world.value = new World(output.value)
   }
 })
 
@@ -26,9 +39,9 @@ onMounted(() => {
 
   <input type="button"
          class="styled"
-         value="Play"
-         @click="play"
-         :disabled="world ? true: false">
+         v-model="lblText"
+         @click="play()"
+         :disabled="world ? false: true">
 </template>
 
 <style scoped>

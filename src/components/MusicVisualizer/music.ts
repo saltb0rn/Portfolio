@@ -1,10 +1,18 @@
 import * as THREE from 'three'
 
+enum State {
+    STOPED,
+    PAUSED,
+    PLAYING
+}
+
+
 export default class {
     listener: THREE.AudioListener
     sound: THREE.Audio
     loader: THREE.AudioLoader
     analyser: THREE.AudioAnalyser
+    state: State = 0
     private isReady: boolean = false
 
     constructor() {
@@ -13,7 +21,8 @@ export default class {
 
         this.sound = new THREE.Audio(this.listener)
         this.sound.onEnded = () => {
-            this.isReady = true
+            this.sound.stop()
+            this.state = 0
         }
         this.loader = new THREE.AudioLoader()
 
@@ -25,29 +34,30 @@ export default class {
         this.isReady = false
         this.loader.load(path, (buffer) => {
             this.sound.setBuffer(buffer)
-            this.sound.setLoop(true)
+            this.sound.setLoop(false)
             this.sound.setVolume(.5)
             this.isReady = true
         })
     }
 
     play() {
-        if (this.isReady && !this.sound.isPlaying) {
+        if (this.isReady && this.state < State.PLAYING) {
             this.sound.play()
-            this.isReady = false
+            this.state = State.PLAYING
         }
     }
 
     pause() {
-        if (this.sound.isPlaying) {
+        if (this.isReady && this.state > State.PAUSED) {
             this.sound.pause()
-            this.isReady = true
+            this.state = State.PAUSED
         }
     }
 
     stop() {
-        if (this.sound.isPlaying) {
+        if (this.isReady && this.state != State.STOPED) {
             this.sound.stop()
+            this.state = State.STOPED
         }
     }
 

@@ -19,4 +19,23 @@ export class World {
         this.postProc = new PostProc()
         Access.outputContainer.appendChild(Access.renderer!.domElement)
     }
+
+    get state () {
+        if (!Access.musicMgr) {
+            return 0
+        }
+        return Access.musicMgr!.state
+    }
+
+    play() {
+        Access.musicMgr!.play()
+    }
+
+    pause() {
+        Access.musicMgr!.pause()
+    }
+
+    stop() {
+        Access.musicMgr!.stop()
+    }
 }
