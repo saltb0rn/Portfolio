@@ -1,12 +1,14 @@
 import * as THREE from 'three'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
 import { EventEmitter } from '../../utils/eventEmitter'
 
 class Access extends EventEmitter {
 
-    public camera: THREE.PerspectiveCamera
-    public renderer: THREE.WebGLRenderer
-    public scene: THREE.Scene
-    public outputContainer: HTMLElement
+    public camera?: THREE.PerspectiveCamera
+    public renderer?: THREE.WebGLRenderer
+    public scene?: THREE.Scene
+    public postProcesser?: EffectComposer
+    public outputContainer?: HTMLElement
     private events: string[] = []
 
     private static instance = new Access()

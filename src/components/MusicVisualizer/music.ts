@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import Access from './access.ts'
 
 export default class {
     listener: THREE.AudioListener

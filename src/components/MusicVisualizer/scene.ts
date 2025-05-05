@@ -15,18 +15,7 @@ export default class Scene {
     musicMgr: Music
     constructor() {
         Access.scene = new THREE.Scene()
-
-        this.proxy = new Proxy(this, {
-            get (_, property) {
-                return Access.scene[property]
-            },
-
-            set(_, property, value) {
-                Access.scene[property] = value
-                return true
-            }
-        })
-
+        this.musicMgr = new Music()        
         this.initScene()
     }
 
@@ -43,14 +32,13 @@ export default class Scene {
         const sphere = new THREE.Mesh(g, m)
         sphere.name = 'sphere'
         sphere.position.set(.0, .0, -5.)
-        Access.scene.add(sphere)
+        Access.scene!.add(sphere)
 
         const wireframe = new THREE.LineSegments(g, m)
         wireframe.scale.setScalar(1 + 0.015)
         wireframe.position.set(.0, .0, -5.)
-        Access.scene.add(wireframe)
+        Access.scene!.add(wireframe)
         
-        this.musicMgr = new Music()
         this.musicMgr.load(track)
 
         Access.on('musicUpdate', (timeStamp: number, timeDelta: number) => {

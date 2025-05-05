@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, Ref, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
+import type { Ref } from 'vue'
 import { World } from './main.ts'
 
 const output: Ref<HTMLElement | undefined> = ref(undefined)
