@@ -38,4 +38,11 @@ export class World {
     stop() {
         Access.musicMgr!.stop()
     }
+
+    dispose() {
+        this.renderer.dispose()
+        this.scene.dispose()
+        this.postProc.dispose()
+        this.camera.dispose()
+    }
 }

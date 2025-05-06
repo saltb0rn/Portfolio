@@ -1,17 +1,11 @@
 import * as THREE from 'three'
-
-enum State {
-    STOPED,
-    PAUSED,
-    PLAYING
-}
-
+import { State } from './typed.ts'
 
 export default class {
-    listener: THREE.AudioListener
-    sound: THREE.Audio
-    loader: THREE.AudioLoader
-    analyser: THREE.AudioAnalyser
+    listener?: THREE.AudioListener
+    sound?: THREE.Audio
+    loader?: THREE.AudioLoader
+    analyser?: THREE.AudioAnalyser
     state: State = 0
     private isReady: boolean = false
 
@@ -21,7 +15,7 @@ export default class {
 
         this.sound = new THREE.Audio(this.listener)
         this.sound.onEnded = () => {
-            this.sound.stop()
+            this.sound!.stop()
             this.state = 0
         }
         this.loader = new THREE.AudioLoader()
@@ -32,37 +26,45 @@ export default class {
 
     load(path: string) {
         this.isReady = false
-        this.loader.load(path, (buffer) => {
-            this.sound.setBuffer(buffer)
-            this.sound.setLoop(false)
-            this.sound.setVolume(.5)
+        this.loader!.load(path, (buffer) => {
+            this.sound!.setBuffer(buffer)
+            this.sound!.setLoop(false)
+            this.sound!.setVolume(.5)
             this.isReady = true
         })
     }
 
     play() {
         if (this.isReady && this.state < State.PLAYING) {
-            this.sound.play()
+            this.sound!.play()
             this.state = State.PLAYING
         }
     }
 
     pause() {
         if (this.isReady && this.state > State.PAUSED) {
-            this.sound.pause()
+            this.sound!.pause()
             this.state = State.PAUSED
         }
     }
 
     stop() {
         if (this.isReady && this.state != State.STOPED) {
-            this.sound.stop()
+            this.sound!.stop()
             this.state = State.STOPED
         }
     }
 
     getFrequency() {
-        const freq = Math.max(this.analyser.getAverageFrequency() - 100.0, 0) / 50
+        const freq = Math.max(this.analyser!.getAverageFrequency() - 100.0, 0) / 50
         return freq
+    }
+
+    dispose() {
+        this.stop()
+        this.listener = undefined
+        this.sound = undefined
+        this.loader = undefined
+        this.analyser = undefined
     }
 }

@@ -46,5 +46,12 @@ export default class {
             isResized = true
         }
         return isResized
-    }    
+    }
+
+    dispose() {
+        if (!Access.renderer) return
+        Access.renderer.renderLists.dispose()
+        Access.renderer.dispose()
+        Access.renderer = undefined
+    }
 }

@@ -4,15 +4,16 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
 import { SavePass } from 'three/examples/jsm/postprocessing/SavePass.js'
-import { BlendShader } from 'three/examples/jsm/shaders/BlendShader.js'
+// import { BlendShader } from 'three/examples/jsm/shaders/BlendShader.js'
 import { CopyShader } from 'three/examples/jsm/shaders/CopyShader.js'
 import { SoftGlitchPass } from '../../utils/postprocessing/SoftGlitchPass.js'
 
 export default class {
 
+    private target?: THREE.WebGLRenderTarget
     constructor() {
 
-        const target = new THREE.WebGLRenderTarget(
+        this.target = new THREE.WebGLRenderTarget(
             Access.renderer!.domElement.width,
             Access.renderer!.domElement.height,
             {
@@ -20,7 +21,7 @@ export default class {
             }
         )
 
-        Access.postProcesser = new EffectComposer(Access.renderer!, target)
+        Access.postProcesser = new EffectComposer(Access.renderer!, this.target)
 
 
         const renderPass = new RenderPass(Access.scene!, Access.camera!)
@@ -62,5 +63,19 @@ export default class {
             }
             // glitchPass.factor = freq
         })
+    }
+
+    dispose() {
+        if (!Access.postProcesser) return
+        Access.off('postprocessing')
+        for (let i = 0; i < Access.postProcesser!.passes.length; i++) {
+            const pass = Access.postProcesser.passes[i]
+            Access.postProcesser.removePass(pass)
+            pass.dispose()
+        }
+        Access.postProcesser?.dispose()
+        Access.postProcesser = undefined
+        this.target!.dispose()
+        this.target = undefined
     }
 }

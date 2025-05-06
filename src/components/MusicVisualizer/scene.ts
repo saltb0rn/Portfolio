@@ -2,6 +2,7 @@ import * as THREE from 'three'
 
 import Access from './access.ts'
 import Music from './music.ts'
+import { State } from './typed.ts'
 
 import gsap from 'gsap'
 
@@ -10,9 +11,7 @@ import fragShader from './shaders/music.frag'
 import track from '../../assets/music/Mr-Top-Player.flac?url'
 import { SoftGlitchPass } from '../../utils/postprocessing/SoftGlitchPass.js'
 
-
 export default class Scene {
-    proxy: unknown
     constructor() {
         Access.scene = new THREE.Scene()
         Access.musicMgr = new Music()
@@ -45,13 +44,21 @@ export default class Scene {
             // sphere.material.uniforms.uTime.value = timeStamp / 1000.0
             const softGlithPass = Access.postProcesser!.passes.find(
                 (value) => value instanceof SoftGlitchPass)
-            if (Access.musicMgr!.state < 2) {
+            if (Access.musicMgr!.state < State.PLAYING) {
                 if (softGlithPass) (softGlithPass as any).factor = 0
-                if (Access.musicMgr!.state < 1 &&
-                    sphere.material.uniforms.uTime.value >= 0) {
+                if (Access.musicMgr!.state < State.PAUSED &&
+                    sphere.material.uniforms.uTime.value >= State.STOPED) {
                     sphere.material.uniforms.uTime.value %= Math.PI
                     gsap.to(
                         sphere.material.uniforms.uTime,
+                        {
+                            duration: 1.5,
+                            ease: 'Slow.easeout',
+                            value: 0
+                        }
+                    )
+                    gsap.to(
+                        sphere.material.uniforms.uAudioFreq,
                         {
                             duration: 1.5,
                             ease: 'Slow.easeout',
@@ -74,5 +81,13 @@ export default class Scene {
             if (softGlithPass) (softGlithPass as any).factor = freq
         })
 
+    }
+
+    dispose() {
+        if (!Access.scene) return
+        Access.musicMgr!.dispose()
+        Access.off('musicUpdate')
+        Access.clear(Access.scene)
+        Access.scene = undefined
     }
 }

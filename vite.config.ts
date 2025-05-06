@@ -7,14 +7,28 @@ import glsl from 'vite-plugin-glsl'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-      vue(),
-      vueDevTools(),
-      glsl()
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks(id) {
+	            if (id.includes('node_modules')) {
+		        return 'vendor';
+	            }
+
+	            return null;                    
+                }
+            }
+        }
     },
-  },
+    
+    plugins: [
+        vue(),
+        vueDevTools(),
+        glsl()
+    ],
+    resolve: {
+        alias: {
+            '@': fileURLToPath(new URL('./src', import.meta.url))
+        },
+    },
 })

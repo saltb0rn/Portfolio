@@ -11,4 +11,11 @@ export default class {
         Access.camera!.position.set(.0, 1., 3.)
         Access.camera!.lookAt(.0, .0, 0)
     }
+
+    dispose() {
+        if (Access.camera) {
+            Access.camera = undefined
+        }
+
+    }
 }

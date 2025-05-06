@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
 import { EventEmitter } from '../../utils/eventEmitter'
+import Disposer from '../../utils/disposer.ts'
 import Music from './music.ts'
 
 class Access extends EventEmitter {
@@ -11,6 +12,7 @@ class Access extends EventEmitter {
     public postProcesser?: EffectComposer
     public outputContainer?: HTMLElement
     public musicMgr?: Music
+    private disposer = new Disposer()
     private events: string[] = []
 
     private static instance = new Access()
@@ -39,6 +41,10 @@ class Access extends EventEmitter {
 
     getEvents() {
         return this.events
+    }
+
+    clear(obj: THREE.Object3D) {
+        this.disposer.disposeOnCascade(obj)
     }
 }
 

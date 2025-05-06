@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import type { Ref } from 'vue'
 import { World } from './main.ts'
+import { State } from './typed.ts'
 
 const output: Ref<HTMLElement | undefined> = ref(undefined)
 
@@ -10,18 +11,18 @@ const world: Ref<World | undefined> = ref(undefined)
 const lblText: Ref<string> = ref('Play')
 
 function play() {
-  if (world && world.value) {
+  if (world.value) {
     if (world.value.state == 2) {
       world.value.pause()
     } else {
       world.value.play()
     }
     const m = {
-      0: 'Play',
-      1: 'Play',
-      2: 'Pause'
+      [State.STOPED]: 'Play',
+      [State.PAUSED]: 'Play',
+      [State.PLAYING]: 'Pause'
     }
-    lblText.value = m[world.value.state]    
+    lblText.value = m[world.value.state]
   }
 
 }
@@ -29,6 +30,12 @@ function play() {
 onMounted(() => {
   if (output.value) {
     world.value = new World(output.value)
+  }
+})
+
+onBeforeUnmount(() => {
+  if (world.value) {
+    world.value.dispose()
   }
 })
 
