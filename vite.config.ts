@@ -10,17 +10,20 @@ export default defineConfig({
     build: {
         rollupOptions: {
             output: {
-                manualChunks(id) {
-	            if (id.includes('node_modules')) {
-		        return 'vendor';
-	            }
-
-	            return null;                    
+                manualChunks(id, /*sed*/) {
+                    if (id.includes('node_modules')) {
+                        const moduleName = id.split('node_modules/')[1].split('/')[0].toString()
+                        // if (moduleName == 'vue') {
+                        //     console.log(sed.getModuleInfo(id))
+                        // }
+                        return moduleName
+                    }
+                    return null
                 }
             }
         }
     },
-    
+
     plugins: [
         vue(),
         vueDevTools(),
@@ -28,7 +31,8 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            '@': fileURLToPath(new URL('./src', import.meta.url))
+            '@': fileURLToPath(new URL('./src', import.meta.url)),
+            'vue': 'vue/dist/vue.esm-bundler.js'
         },
     },
 })
