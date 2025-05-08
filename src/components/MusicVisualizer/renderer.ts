@@ -34,7 +34,7 @@ export default class {
     }
 
     protected respondToRendererSize(): boolean {
-        const pixelRatio = window.devicePixelRatio
+        const pixelRatio = Math.min(window.devicePixelRatio, 1)
         const width = Math.floor(Access.outputContainer!.clientWidth * pixelRatio)
         const height = Math.floor(Access.outputContainer!.clientHeight * pixelRatio)
         const canvas = Access.renderer!.domElement
@@ -44,6 +44,8 @@ export default class {
             Access.camera!.updateProjectionMatrix()
             Access.renderer!.setSize(width, height, false)
             isResized = true
+            console.log(pixelRatio)
+            console.log(Access.outputContainer!.clientWidth)
         }
         return isResized
     }

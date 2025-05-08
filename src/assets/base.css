@@ -50,6 +50,16 @@
   }
 }
 
+/* variables for breakpoints */
+:root {
+    --default-font-size-mobile: 14;
+    --default-font-size-desktop: 16;
+    --default-font-size-mobile-unit: calc(var(--default-font-size-mobile) * 1px);
+    --default-font-size-desktop-unit: calc(var(--default-font-size-desktop) * 1px);
+    --border-color-red: hsl(0 80% 65%);
+    --border-color-blue: hsl(190 80% 65%);
+}
+
 *,
 *::before,
 *::after {
@@ -65,7 +75,6 @@ body {
   transition:
     color 0.5s,
     background-color 0.5s;
-  line-height: 1.6;
   font-family:
     Inter,
     -apple-system,
@@ -79,8 +88,116 @@ body {
     'Droid Sans',
     'Helvetica Neue',
     sans-serif;
-  font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.border-1 {
+    box-shadow:
+        .3rem -.3rem 0 -.1rem var(--color-background),
+        .3rem -.3rem var(--border-color-blue),
+        .6rem -.6rem 0 -.1rem var(--color-background),
+        .6rem -.6rem var(--border-color-red)
+    ;
+    transition: box-shadow .3s;
+}
+
+.border-1:hover {
+    box-shadow:
+        .3rem -.3rem 0 -.1rem var(--color-background),
+        .3rem -.3rem var(--border-color-red),
+        .6rem -.6rem 0 -.1rem var(--color-background),
+        .6rem -.6rem var(--border-color-blue)
+    ;
+}
+
+.border-1.collapsed:hover {
+    box-shadow:
+        .0rem -.0rem 0 -.1rem var(--color-background),
+        .0rem -.0rem var(--border-color-red),
+        .0rem -.0rem 0 -.1rem var(--color-background),
+        .0rem -.0rem var(--border-color-blue)
+    ;
+}
+
+.border-2 {
+    box-shadow:
+        .2rem -.2rem var(--color-background),
+        .3rem -.3rem var(--border-color-blue),
+        .5rem -.5rem var(--color-background),
+        .6rem -.6rem var(--border-color-red)
+    ;
+    transition: box-shadow .3s;
+}
+
+.border-2:hover {
+    box-shadow:
+        .2rem -.2rem var(--color-background),
+        .3rem -.3rem var(--border-color-red),
+        .5rem -.5rem var(--color-background),
+        .6rem -.6rem var(--border-color-blue)
+    ;
+}
+
+.border-3 {
+    box-shadow:
+        -.3rem -.3rem 0 -.1rem var(--color-background),
+        -.3rem -.3rem var(--border-color-blue),
+        -.6rem -.6rem 0 -.1rem var(--color-background),
+        -.6rem -.6rem var(--border-color-red),
+        .3rem .3rem 0 -.1rem var(--color-background),
+        .3rem .3rem var(--border-color-blue),
+        .6rem .6rem 0 -.1rem var(--color-background),
+        .6rem .6rem var(--border-color-red)
+    ;
+    transition: box-shadow .3s;
+}
+
+.border-3:hover {
+    box-shadow:
+        -.3rem -.3rem 0 -.1rem var(--color-background),
+        -.3rem -.3rem var(--border-color-red),
+        -.6rem -.6rem 0 -.1rem var(--color-background),
+        -.6rem -.6rem var(--border-color-blue),
+        .3rem .3rem 0 -.1rem var(--color-background),
+        .3rem .3rem var(--border-color-red),
+        .6rem .6rem 0 -.1rem var(--color-background),
+        .6rem .6rem var(--border-color-blue)
+    ;
+}
+
+.border-4 {
+    box-shadow:
+        -.2rem -.2rem var(--color-background),
+        -.3rem -.3rem var(--border-color-blue),
+        -.5rem -.5rem var(--color-background),
+        -.6rem -.6rem var(--border-color-red),
+        .2rem .2rem var(--color-background),
+        .3rem .3rem var(--border-color-blue),
+        .5rem .5rem var(--color-background),
+        .6rem .6rem var(--border-color-red)
+    ;
+}
+
+.border-4:hover {
+    box-shadow:
+        -.2rem -.2rem var(--color-background),
+        -.3rem -.3rem var(--border-color-red),
+        -.5rem -.5rem var(--color-background),
+        -.6rem -.6rem var(--border-color-blue),
+        .2rem .2rem var(--color-background),
+        .3rem .3rem var(--border-color-red),
+        .5rem .5rem var(--color-background),
+        .6rem .6rem var(--border-color-blue)
+    ;
+    transition: box-shadow .3s;
+}
+
+.border-5 {
+    box-shadow:
+        0 0 0 .3rem var(--color-background),
+        1rem -1rem 0 -.3rem var(--color-background),
+        -.6rem -.6rem var(--border-color-blue)
+    ;
 }
