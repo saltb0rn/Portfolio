@@ -1,22 +1,51 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import MusicVisualizer from '../components/MusicVisualizer/index.vue'
+
+const music = ref()
+
+onMounted(() => {
+  if (music.value) {
+    console.log(music.value.getCover())
+  }
+})
+
 </script>
 
 <template>
   <div class="layout">
     <div class="render border-4">
-      <MusicVisualizer></MusicVisualizer>
+      <MusicVisualizer ref="music"></MusicVisualizer>
     </div>
 
     <div class="intro">
-      <h3 class="title border-5">Gabor/Voronoi Mix Music Visualizer</h3>
 
-      <div>项目来源于: https://www.youtube.com/watch?v=QRpCmBZpBU0&ab_channel=Visionary3D</div>
+      <div class="description">
 
-      <div>油管上还有很多其他的音频可视化教程或 Demo, 这个项目并没有提供成品源代码</div>
+        <h3 class="title border-5">Gabor/Voronoi Mix Music Visualizer</h3>
 
-      <div>对于第一次尝试使用 three.js 做音频可视化的人来说, 算是比较友好</div>
+        <div>
+
+          <div>项目来源: <a href="https://www.youtube.com/watch?v=QRpCmBZpBU0&ab_channel=Visionary3D">YouTube</a></div>
+
+        <div>结合 Gabor Noise 和 Voronoi Noise 两种噪声来实现视觉效果.</div>
+
+        <div>视频没有给出最终代码, 为此参照思路并做出了一些调整得到目前的效果.</div>
+        
+        </div>
+
+      </div>
+
+      <div class="musicinfo">
+        <div>演示曲目: 街头霸王 6 的 Mr. Top Player (Jamie's Theme).</div>
+        <img />
+      </div>
+
+      <div class="instruction">
+        点击进行播放
+      </div>
     </div>
+
   </div>
 </template>
 

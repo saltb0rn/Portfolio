@@ -52,11 +52,6 @@ nav a:first-of-type {
   overflow: auto;
 }
 
-.content {
-  width: 100%;
-  height: 100%;
-}
-
 /* @media (min-width: 1024px) {
    header {
    display: flex;

@@ -7,6 +7,12 @@ const output: Ref<HTMLElement | undefined> = ref(undefined)
 
 const world: Ref<World | undefined> = ref(undefined)
 
+function getCover() {
+  if (world.value) {
+    return world.value.getCover()
+  }
+}
+
 function play() {
   if (world.value) {
     if (world.value.state == 2) {
@@ -16,6 +22,10 @@ function play() {
     }
   }
 }
+
+defineExpose({
+  getCover
+})
 
 onMounted(() => {
   if (output.value) {
@@ -40,5 +50,11 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+}
+
+@media (hover: hover) {
+  .render-container:hover {
+    cursor: pointer;
+  }
 }
 </style>

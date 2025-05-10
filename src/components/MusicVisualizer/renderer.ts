@@ -44,8 +44,6 @@ export default class {
             Access.camera!.updateProjectionMatrix()
             Access.renderer!.setSize(width, height, false)
             isResized = true
-            console.log(pixelRatio)
-            console.log(Access.outputContainer!.clientWidth)
         }
         return isResized
     }
