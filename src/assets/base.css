@@ -89,6 +89,7 @@ body {
     --default-font-size-desktop: 1;
     --default-font-size-mobile-unit: calc(var(--default-font-size-mobile) * 1rem);
     --default-font-size-desktop-unit: calc(var(--default-font-size-desktop) * 1rem);
-    --border-color-red: hsl(0 80% 65%);
-    --border-color-blue: hsl(190 80% 65%);
+    --border-color-red: hsl(341 50% 65%);
+    --border-color-blue: hsl(60 80% 75%);
+    --border-color-basic: hsl(190 30% 75%);
 }

@@ -4,6 +4,10 @@
 
 `着陆页` 目前还在筹划中, 由于涉及 `3D建模`, 而且本人还在学习 `Blender` 中, 所以还需要一段时间才能上线.
 
+页面样式参考:
+
+[CSS Scan 的第 60 号样式](https://getcssscan.com/css-box-shadow-examples)
+
 ## 项目配置
 
 ```sh

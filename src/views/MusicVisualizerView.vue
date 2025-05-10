@@ -23,7 +23,7 @@ onMounted(() => {
       <div class="description">
 
         <div class="title border-5">
-          <h3>Gabor/Voronoi Mix Music Visualizer</h3>          
+          <h3>Gabor/Voronoi Mix Music Visualizer</h3>
         </div>
 
         <div class="workinfo border-1">
