@@ -8,16 +8,37 @@
     padding: 0 1.6rem 1.6rem 1.6rem;
 }
 
+.intro {
+    max-width: 30rem;
+}
+
 .intro .title {
-    display: inline;
+    display: inline-block;
+    border-top-right-radius: .5rem;
+    border-bottom-left-radius: .5rem;
+}
+
+.intro .title h3 {
     background: linear-gradient(315deg, var(--border-color-blue) 5%, var(--border-color-red) 95%);
     color: var(--color-background);
     font-weight: 700;
     font-size: 1.5rem;
-    line-height: 2;
     padding: 0.25rem 0.75rem;
-    border-top-right-radius: .5rem;
-    border-bottom-left-radius: .5rem;
+    border-top-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+}
+
+.intro .workinfo,
+.intro .instruction,
+.intro .musicinfo {
+    border: .1rem solid #d6f8d6;
+    margin-top: 1.6rem;
+}
+
+.intro .workinfo p,
+.intro .instruction p,
+.intro .musicinfo p {
+    padding: .2rem .5rem;
 }
 
 
