@@ -28,16 +28,12 @@
     border-bottom-left-radius: inherit;
 }
 
-.intro .workinfo,
-.intro .instruction,
-.intro .musicinfo {
+.intro .workinfo {
     border: .1rem solid var(--border-color-basic);
     margin-top: 1.6rem;
 }
 
-.intro .workinfo p,
-.intro .instruction p,
-.intro .musicinfo p {
+.intro .workinfo p {
     padding: .2rem .5rem;
 }
 
