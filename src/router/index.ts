@@ -14,6 +14,11 @@ const router = createRouter({
             path: '/music',
             name: 'music',
             component: () => import('../views/MusicVisualizerView.vue')
+        },
+        {
+            path: '/map',
+            name: 'map',
+            component: () => import('../views/MapView.vue')
         }
     ],
 })
