@@ -15,7 +15,7 @@ import Layout from '../components/ArtworkLayout.vue'
     </template>
 
     <template #info>
-      最早在 BabylonJS 上练习的一个项目, 现在移植到 ThreeJS 上, 并使用 Shader 替代了一些效果, 从而进行优化.
+      最早在 BabylonJS 上练习的一个项目, 重构并使用 ThreeJS 实现, 使用 Shader 替代了一些效果, 从而进行优化.
     </template>
 
   </Layout>
