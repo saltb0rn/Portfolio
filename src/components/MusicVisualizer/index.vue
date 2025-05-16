@@ -2,16 +2,20 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import type { Ref } from 'vue'
 import { World } from './main.ts'
+import type { MusicInfo } from './typed.ts'
+import eventBus from './eventBus.ts'
+
+const emit = defineEmits<{
+  loaded: [data: any]
+}>()
 
 const output: Ref<HTMLElement | undefined> = ref(undefined)
 
 const world: Ref<World | undefined> = ref(undefined)
 
-function getCover() {
-  if (world.value) {
-    return world.value.getCover()
-  }
-}
+eventBus.on('loaded', (musicInfo: MusicInfo) => {
+  emit('loaded', musicInfo)
+})
 
 function play() {
   if (world.value) {
@@ -22,10 +26,6 @@ function play() {
     }
   }
 }
-
-defineExpose({
-  getCover
-})
 
 onMounted(() => {
   if (output.value) {

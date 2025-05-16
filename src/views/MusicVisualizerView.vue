@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import Layout from '../components/ArtworkLayout.vue'
-import { ref, onMounted } from 'vue'
+import { ref, type Ref } from 'vue'
 import MusicVisualizer from '../components/MusicVisualizer/index.vue'
+import type { MusicInfo } from '../components/MusicVisualizer/typed.ts'
 
 const music = ref()
+const musicInfo: Ref<MusicInfo> = ref({ cover: '', title: '' })
 
-onMounted(() => {
-  if (music.value) {
-    console.log(music.value.getCover())
-  }
-})
+function musicLoaded(data: MusicInfo) {
+  musicInfo.value = data
+}
 
 </script>
 
@@ -17,7 +17,7 @@ onMounted(() => {
 
   <Layout>
     <template #renderer>
-      <MusicVisualizer ref="music"></MusicVisualizer>
+      <MusicVisualizer ref="music" @loaded="musicLoaded"></MusicVisualizer>
     </template>
 
     <template #title>
@@ -30,8 +30,10 @@ onMounted(() => {
 
     <template #extra>
       <div class="musicinfo border-1">
-        <p>演示曲目: 街头霸王 6 的 Mr. Top Player (Jamie's Theme).</p>
-        <img />
+        <p>演示曲目: {{ musicInfo.title }}</p>
+        <div class="cover">
+          <img :src="musicInfo.cover" />
+        </div>
       </div>
 
       <div class="instruction border-1">
@@ -52,5 +54,14 @@ onMounted(() => {
 .instruction p,
 .musicinfo p {
   padding: .2rem .5rem;
+}
+
+.musicinfo .cover {
+  padding: 1rem;
+}
+
+.musicinfo .cover img {
+  width: 100%;
+  object-fit: contain;
 }
 </style>

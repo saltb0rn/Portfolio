@@ -3,3 +3,8 @@ export enum State {
     PAUSED,
     PLAYING
 }
+
+export type MusicInfo = {
+    title: string,
+    cover: string
+}

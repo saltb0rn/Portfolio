@@ -20,7 +20,7 @@ export class World {
         Access.outputContainer.appendChild(Access.renderer!.domElement)
     }
 
-    getCover() {
+    get cover () {
         return Access.musicMgr!.getCover()
     }
     

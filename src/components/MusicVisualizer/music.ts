@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { parseBuffer } from 'music-metadata'
-import { State } from './typed.ts'
-
+import { State, type MusicInfo } from './typed.ts'
+import eventBus from './eventBus.ts'
 
 export default class {
     listener?: THREE.AudioListener
@@ -39,11 +39,17 @@ export default class {
             loader.load(path, async (buffer) => {
                 const bufferCopy = buffer.slice(0)
                 const metadata = await parseBuffer(new Uint8Array(bufferCopy as ArrayBuffer))
+                const musicInfo: MusicInfo = {
+                    title: metadata.common.title || '',
+                    cover: ''
+                }
                 if (metadata.common.picture) {
                     const { data, format } = metadata.common.picture[0]
                     const blob = new Blob([data], { type: format })
                     this.coverUrl = URL.createObjectURL(blob)
+                    musicInfo.cover = this.coverUrl
                 }
+                eventBus.trigger('loaded', [ musicInfo ])
             })
             this.sound!.setBuffer(buffer)
             this.sound!.setLoop(false)
