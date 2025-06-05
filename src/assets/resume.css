@@ -1,0 +1,102 @@
+.layout {
+    --green: hsl(169, 46%, 56%);
+    --green-dark: hsl(172, 54%, 36%);
+    --green-light: hsl(152, 14%, 65%);
+    --white: hsl(42, 26%, 93%);
+    --black: hsl(16, 7%, 43%);
+    --black-light: hsl(12, 2%, 50%);
+    --font-size-title: 2rem;
+    --font-size-minor-title: 1.25rem;
+    --font-size-name: 2rem;
+    --font-size-time: 0.75rem;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.resume {
+    width: 210mm;
+    height: 297mm;
+
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+}
+
+.profile {
+    flex: 1;
+
+    background-color: var(--green);
+
+    .title {
+        font-size: var(--font-size-title);
+        font-weight: 700;
+        color: var(--white);
+        text-shadow: var(--black) 1px 2px, var(--green-dark) 2px 4px;
+    }
+
+    .name {
+        color: var(--white);
+        font-size: var(--font-size-title);
+        font-weight: 700;
+    }
+
+    .edu {
+    }
+}
+
+.projects {
+    background-color: var(--white);
+    flex: 3;
+
+    .title {
+        color: var(--black);
+        font-size: var(--font-size-title);
+        font-weight: 700;
+
+        &.minor {
+            color: var(--green);
+            font-size: var(--font-size-minor-title);
+
+        }
+    }
+
+    .time {
+        font-size: var(--font-size-time);
+        color: var(--green-light);
+        font-weight: 700;
+    }
+
+    .content {
+        color: var(--black-light);
+    }
+}
+
+/* @media screen and (max-width: 210mm) { */
+/*     .resume { */
+/*     } */
+/* } */
+
+/* 打印设置 */
+@media print {
+    .layout {
+        --font-size-title: 24pt;
+        --font-size-minor-title: 15pt;
+        --font-size-name: 24pt;
+        --font-size-time: 9pt;
+    }
+    
+    .resume {
+        width: 100%;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+@page {
+    size: A4;
+    margin: 0;
+}

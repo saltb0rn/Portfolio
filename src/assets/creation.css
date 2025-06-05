@@ -10,33 +10,32 @@
 
 .intro {
     max-width: 30rem;
-}
 
-.intro .title {
-    display: inline-block;
-    border-top-right-radius: .5rem;
-    border-bottom-left-radius: .5rem;
-}
+    .title {
+        display: inline-block;
+        border-top-right-radius: .5rem;
+        border-bottom-left-radius: .5rem;
 
-.intro .title h3 {
-    background: linear-gradient(315deg, var(--border-color-blue) 5%, var(--border-color-red) 95%);
-    color: var(--color-background);
-    font-weight: 700;
-    font-size: 1.5rem;
-    padding: 0.25rem 0.75rem;
-    border-top-right-radius: inherit;
-    border-bottom-left-radius: inherit;
-}
+        h3 {
+            background: linear-gradient(315deg, var(--border-color-blue) 5%, var(--border-color-red) 95%);
+            color: var(--color-background);
+            font-weight: 700;
+            font-size: 1.5rem;
+            padding: 0.25rem 0.75rem;
+            border-top-right-radius: inherit;
+            border-bottom-left-radius: inherit;            
+        }
+    }
 
-.intro .workinfo {
-    border: .1rem solid var(--border-color-basic);
-    margin-top: 1.6rem;
-}
+    .workinfo {
+        border: .1rem solid var(--border-color-basic);
+        margin-top: 1.6rem;
 
-.intro .workinfo p {
-    padding: .2rem .5rem;
+        p {
+            padding: .2rem .5rem;            
+        }
+    }
 }
-
 
 @media (min-width: 23.4375rem) {
     .render {
@@ -49,20 +48,23 @@
     }
 }
 
-@media (min-width: 64rem) {
+@media (min-width: 50rem) {
     .layout {
         align-items: center;
     }
 
     .render {
-        max-width: 64rem;
-        max-height: 64rem;
+        /* max-width: 46.6875rem; */
+        /* max-height: 46.6875rem; */
+        max-width: 45rem;
+        max-height: 45rem;
+        flex-shrink: 0;
     }
-
 }
 
-@media (min-width: 86.875rem) {
+@media (min-width: 76.875rem) {
     .layout {
+        align-items: center;
         flex-direction: row;
         justify-content: center;
     }

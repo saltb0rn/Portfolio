@@ -1,5 +1,4 @@
 import { createRouter, /*createWebHistory,*/ createWebHashHistory } from 'vue-router'
-import HomeView from '../views/LandPageView.vue'
 
 const router = createRouter({
     // history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,17 +7,29 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: HomeView,
+            component: () => import('../views/LandingPageView.vue')
         },
         {
-            path: '/music',
-            name: 'music',
-            component: () => import('../views/MusicVisualizerView.vue')
+            path: '/',
+            component: () => import('../components/MainLayout.vue'),
+            children: [
+                {
+                    path: '/music',
+                    name: 'music',
+                    component: () => import('../views/MusicVisualizerView.vue')
+                },
+                {
+                    path: '/map',
+                    name: 'map',
+                    component: () => import('../views/MapView.vue')
+                },
+            ]
+
         },
         {
-            path: '/map',
-            name: 'map',
-            component: () => import('../views/MapView.vue')
+            path: '/resume',
+            name: 'resume',
+            component: () => import('../views/ResumeView.vue')
         }
     ],
 })
